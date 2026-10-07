@@ -39,7 +39,7 @@ export const contact = {
   // 2. Crie um formulário e copie o ID (ex.: "xdoqwerty" da URL formspree.io/f/xdoqwerty)
   // 3. Cole o ID abaixo. Enquanto estiver vazio, o formulário mostra um aviso.
   // ───────────────────────────────────────────────────────────────────────
-  formspreeId: '',
+  formspreeId: 'mdeaezgb',
   social: {
     instagram: 'https://instagram.com/equipeavanco',
     facebook: 'https://facebook.com/avanco.equipe',
