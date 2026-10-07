@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import { services, contact, href } from '../data/site';
+
+const wa = `https://wa.me/${contact.primaryWhatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
+---
+<Layout
+  title="Serviços"
+  description="Cobertura médica de eventos, treinamentos (NR-33, NR-35, CIPA), consultoria em SST (PGR, PCMSO, LTCAT) e perícia técnica — Equipe Avanço."
+>
+  <PageHeader
+    eyebrow="Nossos serviços"
+    title="Soluções completas em segurança"
+    subtitle="Da cobertura médica de eventos à perícia técnica, estruturamos cada serviço sob medida para a sua operação."
+  />
+
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 sm:py-20">
+    <div class="grid gap-6 md:grid-cols-2">
+      {services.map((service) => <ServiceCard service={service} detailed />)}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-navy-50/60">
+    <div class="mx-auto max-w-5xl px-4 py-14 text-center sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-extrabold text-navy-800 sm:text-3xl">
+        Não encontrou o que procura?
+      </h2>
+      <p class="mx-auto mt-3 max-w-2xl text-navy-500">
+        Montamos soluções personalizadas. Fale com a nossa equipe e explique a sua necessidade.
+      </p>
+      <div class="mt-7 flex flex-wrap justify-center gap-4">
+        <Button href={wa} target="_blank" variant="primary" size="lg">
+          <Icon name="whatsapp" class="h-5 w-5" />
+          Solicitar orçamento
+        </Button>
+        <Button href={href('/contato')} variant="outline" size="lg">Página de contato</Button>
+      </div>
+    </div>
+  </section>
+</Layout>

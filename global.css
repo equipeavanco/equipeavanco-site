@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+
+/* ───────────────────────────────────────────────────────────────
+   IDENTIDADE VISUAL — EQUIPE AVANÇO
+   Azul-marinho (#003b73) + Magenta (#d10078)
+   Para mudar a marca inteira, ajuste os tokens abaixo.
+   ─────────────────────────────────────────────────────────────── */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+
+  /* Azul-marinho (cor principal) */
+  --color-navy-50: #eaf1f9;
+  --color-navy-100: #d1e4f6;
+  --color-navy-200: #a3c3e8;
+  --color-navy-300: #6f9ed6;
+  --color-navy-400: #3f72b4;
+  --color-navy-500: #1d4e8f;
+  --color-navy-600: #003b73;
+  --color-navy-700: #00305f;
+  --color-navy-800: #00254a;
+  --color-navy-900: #001a36;
+
+  /* Magenta (cor de destaque) */
+  --color-magenta-50: #fde7f2;
+  --color-magenta-100: #fbcfe4;
+  --color-magenta-200: #f79cc8;
+  --color-magenta-300: #f163a6;
+  --color-magenta-400: #e63289;
+  --color-magenta-500: #d10078;
+  --color-magenta-600: #b00065;
+  --color-magenta-700: #8c0050;
+  --color-magenta-800: #6b003d;
+  --color-magenta-900: #4d002c;
+}
+
+/* Base */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Realce de seleção de texto com a cor da marca */
+::selection {
+  background-color: var(--color-magenta-500);
+  color: #fff;
+}
+
+/* Utilitário: fundo com gradiente da marca */
+.bg-brand-gradient {
+  background-image: linear-gradient(135deg, var(--color-navy-700) 0%, var(--color-navy-600) 55%, var(--color-magenta-600) 140%);
+}
+
+/* Animação sutil de entrada */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out both;
+}

@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import { site, mvv, differentiators, contact, href } from '../data/site';
+
+const wa = `https://wa.me/${contact.primaryWhatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
+---
+<Layout
+  title="Sobre"
+  description="Fundada em 2019, a Equipe Avanço é especializada em assessoria preventiva, médica e pericial, com foco em Segurança e Saúde Ocupacional."
+>
+  <PageHeader
+    eyebrow="Quem somos"
+    title="Em progresso pela vida"
+    subtitle={`${site.descriptor}, desde ${site.foundedYear}.`}
+  />
+
+  <!-- História -->
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 sm:py-20">
+    <div class="prose-brand space-y-5 text-lg leading-relaxed text-navy-600">
+      <p>
+        Fundada em {site.foundedYear}, a <strong class="text-navy-800">Equipe Avanço</strong> é
+        especializada em assessoria preventiva, médica e pericial, com foco em
+        Segurança e Saúde Ocupacional.
+      </p>
+      <p>
+        Nascemos para oferecer soluções estratégicas e inovadoras que garantam
+        ambientes mais seguros. Unimos uma equipe técnica qualificada — bombeiros
+        civis, socorristas, médicos, enfermeiros e peritos — a processos
+        padronizados e tecnologia, entregando atendimento ágil e de alta performance
+        em todo o Brasil.
+      </p>
+    </div>
+  </section>
+
+  <!-- Missão, Visão, Valores -->
+  <section class="bg-navy-50/50">
+    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 sm:py-20">
+      <div class="grid gap-6 lg:grid-cols-3">
+        <div class="rounded-2xl bg-white p-8 shadow-sm">
+          <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-50 text-navy-600">
+            <Icon name="target" class="h-6 w-6" />
+          </div>
+          <h2 class="mt-5 text-xl font-bold text-navy-800">Missão</h2>
+          <p class="mt-3 text-sm leading-relaxed text-navy-500">{mvv.mission}</p>
+        </div>
+        <div class="rounded-2xl bg-white p-8 shadow-sm">
+          <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-50 text-navy-600">
+            <Icon name="bolt" class="h-6 w-6" />
+          </div>
+          <h2 class="mt-5 text-xl font-bold text-navy-800">Visão</h2>
+          <p class="mt-3 text-sm leading-relaxed text-navy-500">{mvv.vision}</p>
+        </div>
+        <div class="rounded-2xl bg-white p-8 shadow-sm">
+          <div class="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-50 text-navy-600">
+            <Icon name="shield" class="h-6 w-6" />
+          </div>
+          <h2 class="mt-5 text-xl font-bold text-navy-800">Valores</h2>
+          <ul class="mt-3 space-y-2 text-sm text-navy-600">
+            {mvv.values.map((v) => (
+              <li class="flex items-start gap-2">
+                <Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-magenta-500" />
+                <span>{v}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diferenciais -->
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 sm:py-20">
+    <div class="mx-auto max-w-2xl text-center">
+      <span class="text-sm font-semibold uppercase tracking-wider text-magenta-500">Por que a Avanço</span>
+      <h2 class="mt-3 text-3xl font-extrabold text-navy-800">Nossos diferenciais</h2>
+    </div>
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {differentiators.map((d) => (
+        <div class="rounded-2xl border border-navy-100 p-6 text-center">
+          <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-magenta-50 text-magenta-500">
+            <Icon name={d.icon} class="h-7 w-7" />
+          </div>
+          <h3 class="mt-4 font-bold text-navy-800">{d.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-navy-500">{d.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-brand-gradient">
+    <div class="mx-auto max-w-5xl px-4 py-14 text-center text-white sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-extrabold sm:text-3xl">Vamos trabalhar juntos?</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-navy-100">
+        Conte com a nossa experiência para proteger pessoas e cumprir a legislação.
+      </p>
+      <div class="mt-7 flex flex-wrap justify-center gap-4">
+        <Button href={wa} target="_blank" variant="primary" size="lg">
+          <Icon name="whatsapp" class="h-5 w-5" />
+          Falar no WhatsApp
+        </Button>
+        <Button href={href('/servicos')} variant="white" size="lg">Ver serviços</Button>
+      </div>
+    </div>
+  </section>
+</Layout>

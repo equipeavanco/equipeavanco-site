@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import { href } from '../data/site';
+---
+<Layout title="Página não encontrada">
+  <section class="mx-auto flex max-w-2xl flex-col items-center px-4 py-24 text-center sm:px-6 sm:py-32">
+    <p class="text-7xl font-extrabold text-magenta-500">404</p>
+    <h1 class="mt-4 text-3xl font-bold text-navy-800">Página não encontrada</h1>
+    <p class="mt-4 text-navy-500">
+      O endereço que você tentou acessar não existe ou foi movido.
+    </p>
+    <div class="mt-8">
+      <Button href={href('/')} variant="secondary" size="lg">
+        <Icon name="arrow" class="h-5 w-5 rotate-180" />
+        Voltar ao início
+      </Button>
+    </div>
+  </section>
+</Layout>

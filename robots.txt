@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://equipeavanco.github.io/equipeavanco-site/sitemap-index.xml

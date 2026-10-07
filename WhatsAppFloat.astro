@@ -1,0 +1,15 @@
+---
+import { contact } from '../data/site';
+import Icon from './Icon.astro';
+const wa = `https://wa.me/${contact.primaryWhatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
+---
+<a
+  href={wa}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Fale conosco no WhatsApp"
+  class="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl shadow-black/20 transition-transform hover:scale-110"
+>
+  <Icon name="whatsapp" class="h-7 w-7" />
+  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#25D366] opacity-30"></span>
+</a>
