@@ -56,8 +56,7 @@ export const contact = {
 // (cada cliente vê só os próprios dados) é a Fase 2.
 // ───────────────────────────────────────────────────────────────────────────
 export const powerBi = {
-  embedUrl: 'https://app.powerbi.com/view?r=eyJrIjoiZGE1NTMzN2MtZGNiOS00ZTQyLTk1NDQtNWMyOTk3MGVhNzIwIiwidCI6ImY5MzIyYzQ0LTcxMTEtNGQ4Mi05OTAyLWRmMmE1MjhlMDM3MCJ9',
-};
+  embedUrl: '',};
 
 export const nav = [
   { label: 'Início', href: '/' },
