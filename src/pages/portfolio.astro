@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import PortfolioCard from '../components/PortfolioCard.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import { portfolio, contact, href } from '../data/site';
+
+const wa = `https://wa.me/${contact.primaryWhatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
+---
+<Layout
+  title="Portfólio"
+  description="Portfólio de atendimento da Equipe Avanço: cobertura médica e de segurança em grandes eventos — Loba Fest Run, Grupo Boticário, X Business, festivais e muito mais."
+>
+  <PageHeader
+    eyebrow="Portfólio de atendimento"
+    title="Eventos que confiaram na Avanço"
+    subtitle="Cobertura médica e de segurança em grandes eventos, com estrutura completa e operação técnica especializada em todo o Brasil."
+  />
+
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 sm:py-20">
+    <div class="mx-auto mb-12 max-w-3xl text-center">
+      <p class="text-navy-600">
+        Oferecemos um portfólio completo de serviços especializados, desenvolvidos para atender às
+        mais diversas necessidades em segurança preventiva e emergencial — do atendimento médico de
+        urgência à consultoria técnica avançada, sempre com excelência operacional e equipamentos de
+        última geração.
+      </p>
+    </div>
+
+    <div class="grid gap-7 md:grid-cols-2">
+      {portfolio.map((event) => <PortfolioCard event={event} />)}
+    </div>
+  </section>
+
+  <section class="bg-brand-gradient">
+    <div class="mx-auto max-w-5xl px-4 py-14 text-center text-white sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-extrabold sm:text-3xl">Leve essa estrutura para o seu evento</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-navy-100">
+        Solicite um orçamento e tenha a cobertura completa da Equipe Avanço na sua operação.
+      </p>
+      <div class="mt-7 flex flex-wrap justify-center gap-4">
+        <Button href={wa} target="_blank" variant="primary" size="lg">
+          <Icon name="whatsapp" class="h-5 w-5" />
+          Solicitar orçamento
+        </Button>
+        <Button href={href('/contato')} variant="white" size="lg">Página de contato</Button>
+      </div>
+    </div>
+  </section>
+</Layout>
