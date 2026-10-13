@@ -1,5 +1,5 @@
 // ════════════════════════════════════════════════════════════════════════
-//  CONTEÚDO DO SITE — EQUIPE AVANÇO
+//  CONTEÚDO DO SITE - EQUIPE AVANÇO
 //  Edite este arquivo para mudar textos, contatos, serviços e menu.
 //  (Praticamente tudo do site é controlado a partir daqui.)
 // ════════════════════════════════════════════════════════════════════════
@@ -179,7 +179,7 @@ export const portfolio: PortfolioEvent[] = [
     slug: 'loba-fest-run-2026',
     image: 'loba2026',
     title: 'Loba Fest Run 2026',
-    subtitle: 'Maratona na Ilha do Mel/PR — Segurança Premium 360°',
+    subtitle: 'Maratona na Ilha do Mel/PR - Segurança Premium 360°',
     intro: 'Estrutura completa de proteção aos atletas:',
     items: [
       'Tenda Médica Avançada com equipe de emergência',
@@ -234,7 +234,7 @@ export const portfolio: PortfolioEvent[] = [
     slug: 'x-business',
     image: 'xbusiness',
     title: 'X Business',
-    subtitle: 'O maior ecossistema de negócios e networking da América Latina — com a excelência em segurança da Equipe Avanço:',
+    subtitle: 'O maior ecossistema de negócios e networking da América Latina - com a excelência em segurança da Equipe Avanço:',
     items: [
       'Solução integrada de segurança que superou as expectativas',
       'Estrutura completa: ambulatório avançado, bombeiros civis e socorristas especializados',
@@ -249,10 +249,10 @@ export const portfolio: PortfolioEvent[] = [
     title: 'Festival Samba Curitiba',
     subtitle: 'Um dos maiores festivais de pagode do Brasil, com segurança de alto padrão da Equipe Avanço:',
     items: [
-      'Cobertura 360° — do planejamento à execução',
-      'Equipe especializada — bombeiros civis e socorristas treinados',
-      'Suporte médico — ambulância equipada e plantão permanente',
-      'Prevenção ativa — monitoramento contínuo de todo o ambiente',
+      'Cobertura 360° - do planejamento à execução',
+      'Equipe especializada - bombeiros civis e socorristas treinados',
+      'Suporte médico - ambulância equipada e plantão permanente',
+      'Prevenção ativa - monitoramento contínuo de todo o ambiente',
     ],
     note: 'Garantimos a segurança para que a festa nunca pare!',
   },
@@ -260,7 +260,7 @@ export const portfolio: PortfolioEvent[] = [
     slug: 'loba-fest-run-2025',
     image: 'loba2025',
     title: 'Loba Fest Run 2025',
-    subtitle: 'Maratona na Ilha do Mel/PR — Segurança Premium 360°',
+    subtitle: 'Maratona na Ilha do Mel/PR - Segurança Premium 360°',
     intro: 'Estrutura completa de proteção aos atletas:',
     items: [
       'Tenda Médica Avançada com equipe de emergência',
@@ -277,7 +277,7 @@ export const portfolio: PortfolioEvent[] = [
 // Avaliações reais de clientes no Google. Para trocar/adicionar, edite aqui.
 // googleReviewsUrl: link do perfil da empresa no Google (botão "Ver no Google").
 // ───────────────────────────────────────────────────────────────────────────
-export const googleReviewsUrl = '';
+export const googleReviewsUrl = 'https://www.google.com/maps?cid=4527225263689063204';
 
 export type Review = { name: string; rating: number; when: string; text: string };
 

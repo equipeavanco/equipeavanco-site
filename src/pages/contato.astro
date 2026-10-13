@@ -89,7 +89,7 @@ const formAction = contact.formspreeId ? `https://formspree.io/f/${contact.forms
 
           {formAction ? (
             <form id="contact-form" action={formAction} method="POST" class="mt-7 space-y-5">
-              <input type="hidden" name="_subject" value={`Novo contato pelo site — ${site.name}`} />
+              <input type="hidden" name="_subject" value={`Novo contato pelo site - ${site.name}`} />
               <!-- honeypot anti-spam -->
               <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
 
