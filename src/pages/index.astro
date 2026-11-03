@@ -9,6 +9,7 @@ import { site, contact, services, differentiators, mvv, portfolio, href } from '
 
 const wa = `https://wa.me/${contact.primaryWhatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
 const featured = portfolio.slice(0, 3);
+const team = ['Bombeiros', 'Socorristas', 'Enfermeiros', 'Médicos', 'Fisioterapeutas', 'Engenheiros de segurança'];
 ---
 <Layout>
   <!-- ================= HERO ================= -->
@@ -18,20 +19,30 @@ const featured = portfolio.slice(0, 3);
       <div class="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-navy-300 blur-3xl"></div>
     </div>
     <div class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
-      <div class="max-w-3xl animate-fade-up">
+      <div class="max-w-4xl animate-fade-up">
         <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider backdrop-blur">
           <Icon name="shield" class="h-4 w-4" />
           {site.descriptor}
         </span>
         <h1 class="mt-6 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-          Prevenção que faz a <span class="text-magenta-300">diferença</span>
+          Você cuida do evento.<br />
+          <span class="text-magenta-300">Nós cuidamos das pessoas.</span>
         </h1>
         <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100">
-          Bombeiros civis e socorristas para eventos, com estrutura completa de
-          emergência e assessoria preventiva e médica -
-          com atendimento em todo o Brasil.
+          Assessoria preventiva e médica para <strong class="font-semibold text-white">shows, baladas,
+          empresas, indústrias e eventos em geral</strong>. Tudo o que o seu ambiente precisa
+          para estar seguro, com uma única equipe.
         </p>
-        <div class="mt-9 flex flex-wrap gap-4">
+        <ul class="mt-6 flex max-w-2xl flex-wrap gap-2" aria-label="Nossa equipe">
+          {team.map((t) => (
+            <li class="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm font-medium text-white backdrop-blur">{t}</li>
+          ))}
+        </ul>
+        <p class="mt-5 flex items-center gap-2 text-sm font-semibold text-navy-100">
+          <Icon name="pin" class="h-4 w-4 text-magenta-300" />
+          Base no Paraná e litoral paranaense · Atendimento em todo o Brasil
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
           <Button href={wa} target="_blank" variant="primary" size="lg">
             <Icon name="whatsapp" class="h-5 w-5" />
             Solicitar orçamento
