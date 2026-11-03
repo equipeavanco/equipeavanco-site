@@ -65,7 +65,44 @@ export const nav = [
   { label: 'Portfólio', href: '/portfolio' },
   { label: 'Sobre', href: '/sobre' },
   { label: 'Cliente', href: '/cliente' },
+  { label: 'Equipe', href: '/equipe' },
+  { label: 'Trabalhe conosco', href: '/trabalhe-conosco' },
   { label: 'Contato', href: '/contato' },
+];
+
+// ───────────────────────────────────────────────────────────────────────────
+// EQUIPE OPERACIONAL (área da equipe fixa)
+// Cole em `url` o link do formulário (ex.: Google Forms) e do relatório
+// (ex.: Power BI). Enquanto estiver vazio, o card mostra "em breve".
+// ───────────────────────────────────────────────────────────────────────────
+export const equipeLinks = [
+  {
+    icon: 'clipboard',
+    title: 'Formulário diário',
+    text: 'Registro do plantão: evento, horários, atendimentos e ocorrências do dia.',
+    cta: 'Preencher formulário',
+    url: '',
+  },
+  {
+    icon: 'chart',
+    title: 'Relatórios',
+    text: 'Acompanhe os relatórios e indicadores da operação.',
+    cta: 'Abrir relatórios',
+    url: '',
+  },
+];
+
+/** Formações aceitas no "Trabalhe conosco" */
+export const formacoes = [
+  'Bombeiro(a) civil',
+  'Socorrista / APH',
+  'Guarda-vidas',
+  'Técnico(a) de enfermagem',
+  'Enfermeiro(a)',
+  'Médico(a)',
+  'Fisioterapeuta',
+  'Engenheiro(a) / Técnico(a) de segurança do trabalho',
+  'Outra',
 ];
 
 export type Service = {
