@@ -27,9 +27,9 @@ const featured = portfolio.slice(0, 3);
           Prevenção que faz a <span class="text-magenta-300">diferença</span>
         </h1>
         <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100">
-          Soluções estratégicas e inovadoras em Segurança e Saúde Ocupacional:
-          cobertura médica de eventos, treinamentos, consultoria e perícia técnica -
-          com {contact.region.toLowerCase()}.
+          Bombeiros civis e socorristas para eventos, com estrutura completa de
+          emergência e assessoria preventiva e médica -
+          com atendimento em todo o Brasil.
         </p>
         <div class="mt-9 flex flex-wrap gap-4">
           <Button href={wa} target="_blank" variant="primary" size="lg">
@@ -73,7 +73,7 @@ const featured = portfolio.slice(0, 3);
         Da emergência à prevenção, uma estrutura completa para proteger pessoas e cumprir a legislação.
       </p>
     </div>
-    <div class="mt-14 grid gap-6 md:grid-cols-2">
+    <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {services.map((service) => <ServiceCard service={service} />)}
     </div>
   </section>
