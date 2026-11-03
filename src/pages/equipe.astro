@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Icon from '../components/Icon.astro';
+import { equipeLinks, contact } from '../data/site';
+---
+<Layout
+  title="Equipe operacional"
+  description="Área da equipe operacional da Equipe Avanço: formulário diário e relatórios."
+  noindex
+>
+  <PageHeader
+    eyebrow="Equipe operacional"
+    title="Área da equipe"
+    subtitle="Acesso rápido ao formulário diário e aos relatórios da operação. Uso exclusivo da equipe fixa."
+  />
+
+  <section class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 sm:py-20">
+    <div class="grid gap-6 md:grid-cols-2">
+      {equipeLinks.map((l) => (
+        <div class="flex flex-col rounded-2xl border border-navy-100 bg-white p-8 shadow-sm">
+          <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-navy-50 text-magenta-500">
+            <Icon name={l.icon} class="h-7 w-7" />
+          </div>
+          <h2 class="mt-5 text-2xl font-bold text-navy-800">{l.title}</h2>
+          <p class="mt-2 flex-1 text-navy-500">{l.text}</p>
+          {l.url ? (
+            <a href={l.url} target="_blank" rel="noopener noreferrer"
+              class="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-magenta-500 px-7 py-3.5 font-semibold text-white shadow-lg shadow-magenta-500/25 transition-all hover:-translate-y-0.5 hover:bg-magenta-600">
+              {l.cta}
+              <Icon name="arrow" class="h-5 w-5" />
+            </a>
+          ) : (
+            <span class="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full border border-dashed border-navy-300 bg-navy-50 px-7 py-3.5 text-sm font-semibold text-navy-500">
+              <Icon name="lock" class="h-4 w-4" />
+              Em breve
+            </span>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <p class="mt-10 text-center text-sm text-navy-500">
+      Dúvidas sobre o preenchimento? Fale com a coordenação:
+      {contact.phones.map((p, i) => (
+        <>
+          {i > 0 && ' · '}
+          <a href={`https://wa.me/${p.whatsapp}`} target="_blank" rel="noopener noreferrer" class="font-semibold text-magenta-600 hover:underline">{p.name}</a>
+        </>
+      ))}
+    </p>
+  </section>
+</Layout>
