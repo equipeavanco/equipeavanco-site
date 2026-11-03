@@ -5,6 +5,7 @@ import Icon from '../components/Icon.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import PortfolioCard from '../components/PortfolioCard.astro';
 import Reviews from '../components/Reviews.astro';
+import ServicePhotos from '../components/ServicePhotos.astro';
 import { site, contact, services, differentiators, mvv, portfolio, href } from '../data/site';
 
 const wa = `https://wa.me/${contact.primaryWhatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
@@ -85,7 +86,10 @@ const team = ['Bombeiros', 'Socorristas', 'Enfermeiros', 'Médicos', 'Fisioterap
         Da emergência à prevenção, uma estrutura completa para proteger pessoas e cumprir a legislação.
       </p>
     </div>
-    <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-12">
+      <ServicePhotos />
+    </div>
+    <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {services.map((service) => <ServiceCard service={service} />)}
     </div>
   </section>
