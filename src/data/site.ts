@@ -18,10 +18,10 @@ export const site = {
   shortName: 'Avanço',
   legalName: 'Equipe Avanço',
   tagline: 'Em progresso pela vida',
-  descriptor: 'Assessoria preventiva, médica e pericial',
+  descriptor: 'Assessoria preventiva e médica',
   foundedYear: 2019,
   description:
-    'Especialistas em Segurança e Saúde Ocupacional. Cobertura médica de eventos, treinamentos, consultoria e perícia técnica com atendimento em todo o Brasil.',
+    'Bombeiros civis e socorristas para eventos. Assessoria preventiva e médica com estrutura completa de emergência e atendimento em todo o Brasil.',
 };
 
 export const contact = {
@@ -74,35 +74,23 @@ export type Service = {
   title: string;
   summary: string;
   items: string[];
+  featured?: boolean; // serviço principal: ganha destaque no topo
 };
 
 export const services: Service[] = [
   {
     slug: 'cobertura-eventos',
     icon: 'ambulance',
-    title: 'Cobertura médica de eventos',
+    title: 'Bombeiros civis e socorristas para eventos',
     summary:
-      'Estrutura completa de emergência para o seu evento, do pequeno porte aos grandes festivais.',
+      'Equipe de bombeiros civis e socorristas com estrutura completa de emergência para o seu evento, do pequeno porte aos grandes festivais.',
+    featured: true,
     items: [
       'Bombeiros civis, socorristas e resgatistas',
       'Médicos, enfermeiros e equipe de APH',
       'Ambulâncias (básicas e UTI)',
       'Guarda-vidas e resgate aquático',
       'Tendas médicas e postos fixos de atendimento',
-    ],
-  },
-  {
-    slug: 'treinamentos',
-    icon: 'graduation',
-    title: 'Treinamentos e capacitações',
-    summary:
-      'Capacitação prática e certificada para equipes e brigadas, sob medida para a sua operação.',
-    items: [
-      'CIPA e primeiros socorros',
-      'NR-33 (espaços confinados) e NR-35 (trabalho em altura)',
-      'Combate a incêndio e brigada de emergência',
-      'Planos de abandono e evacuação',
-      'Instrutores certificados',
     ],
   },
   {
@@ -131,6 +119,20 @@ export const services: Service[] = [
       'Laudos e pareceres técnicos',
     ],
   },
+  {
+    slug: 'treinamentos',
+    icon: 'graduation',
+    title: 'Treinamentos e capacitações',
+    summary:
+      'Capacitação prática e certificada para equipes e brigadas, sob medida para a sua operação.',
+    items: [
+      'CIPA e primeiros socorros',
+      'NR-33 (espaços confinados) e NR-35 (trabalho em altura)',
+      'Combate a incêndio e brigada de emergência',
+      'Planos de abandono e evacuação',
+      'Instrutores certificados',
+    ],
+  },
 ];
 
 export type Differentiator = { icon: string; title: string; text: string };
@@ -139,7 +141,7 @@ export const differentiators: Differentiator[] = [
   { icon: 'bolt', title: 'Agilidade', text: 'Resposta rápida em emergências, quando cada minuto conta.' },
   { icon: 'scale', title: 'Perícia técnica', text: 'Análise técnica especializada e laudos confiáveis.' },
   { icon: 'map', title: 'Atendimento nacional', text: 'Cobertura em todo o território brasileiro.' },
-  { icon: 'target', title: 'Solução sob medida', text: 'Serviços e treinamentos ajustados à sua necessidade.' },
+  { icon: 'target', title: 'Solução sob medida', text: 'Equipes e estrutura dimensionadas para cada evento.' },
 ];
 
 export const mvv = {
