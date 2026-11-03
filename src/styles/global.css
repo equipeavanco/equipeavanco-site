@@ -6,8 +6,15 @@
    Para mudar a marca inteira, ajuste os tokens abaixo.
    ─────────────────────────────────────────────────────────────── */
 @theme {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+  --font-sans: 'Barlow', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
     Helvetica, Arial, sans-serif;
+  --font-display: 'Barlow Condensed', 'Barlow', ui-sans-serif, system-ui, sans-serif;
+
+  /* Sombras com tom da marca (mais presença nas caixas) */
+  --shadow-sm: 0 1px 2px rgb(0 37 74 / 0.08), 0 12px 28px -12px rgb(0 37 74 / 0.32);
+  --shadow-md: 0 2px 4px rgb(0 37 74 / 0.08), 0 16px 32px -12px rgb(0 37 74 / 0.36);
+  --shadow-lg: 0 4px 8px rgb(0 37 74 / 0.08), 0 20px 40px -14px rgb(0 37 74 / 0.40);
+  --shadow-xl: 0 6px 12px rgb(0 37 74 / 0.10), 0 28px 56px -16px rgb(0 37 74 / 0.45);
 
   /* Azul-marinho (cor principal) */
   --color-navy-50: #eaf1f9;
@@ -44,6 +51,73 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Títulos: condensados, em caixa alta, com cara de sinalização de segurança */
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+}
+h1,
+h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 1.02;
+}
+
+/* Faixa refletiva (inspirada no colete da equipe): magenta / prata / azul */
+.faixa {
+  display: inline-block;
+  width: 3rem;
+  height: 0.6rem;
+  border-radius: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-magenta-500) 0 33%,
+    #d9dde3 33% 67%,
+    var(--color-navy-600) 67% 100%
+  );
+}
+
+/* Faixa refletiva horizontal (rodapé de seções escuras) */
+.band-refletiva {
+  height: 0.75rem;
+  background: linear-gradient(
+    to bottom,
+    var(--color-magenta-500) 0 33%,
+    #d9dde3 33% 67%,
+    var(--color-navy-800) 67% 100%
+  );
+}
+
+/* Rótulo acima dos títulos */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-magenta-500);
+}
+.eyebrow::before {
+  content: '';
+  width: 2.5rem;
+  height: 0.5rem;
+  border-radius: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-magenta-500) 0 33%,
+    #d9dde3 33% 67%,
+    var(--color-navy-600) 67% 100%
+  );
+}
+.eyebrow-light {
+  color: var(--color-magenta-300);
 }
 
 /* Realce de seleção de texto com a cor da marca */
