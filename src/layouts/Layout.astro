@@ -8,10 +8,12 @@ import { site, href } from '../data/site';
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 const {
   title,
   description = site.description,
+  noindex = false,
 } = Astro.props;
 
 const pageTitle = title ? `${title} | ${site.name}` : `${site.name} - ${site.descriptor}`;
@@ -25,6 +27,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Favicons -->
     <link rel="icon" href={href('/favicon.ico')} sizes="any" />
