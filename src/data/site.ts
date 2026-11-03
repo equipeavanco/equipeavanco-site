@@ -21,7 +21,7 @@ export const site = {
   descriptor: 'Assessoria preventiva e médica',
   foundedYear: 2019,
   description:
-    'Bombeiros civis e socorristas para eventos. Assessoria preventiva e médica com estrutura completa de emergência e atendimento em todo o Brasil.',
+    'Assessoria preventiva e médica para shows, baladas, empresas, indústrias e eventos. Bombeiros, socorristas, enfermeiros, médicos, fisioterapeutas e engenheiros de segurança. Base no Paraná, atendimento em todo o Brasil.',
 };
 
 export const contact = {
