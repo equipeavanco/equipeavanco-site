@@ -30,17 +30,18 @@ const team = ['Bombeiros', 'Socorristas', 'Enfermeiros', 'Médicos', 'Fisioterap
         </h1>
         <p class="mt-6 max-w-2xl text-lg leading-relaxed text-navy-100">
           Assessoria preventiva e médica para <strong class="font-semibold text-white">shows, baladas,
-          empresas, indústrias e eventos em geral</strong>. Tudo o que o seu ambiente precisa
-          para estar seguro, com uma única equipe.
+          empresas, indústrias e eventos em geral</strong>, atuando em todo o Paraná e litoral
+          paranaense, com um quadro de profissionais interdisciplinar:
         </p>
         <ul class="mt-6 flex max-w-2xl flex-wrap gap-2" aria-label="Nossa equipe">
           {team.map((t) => (
             <li class="rounded-full border border-white/20 bg-white/10 px-3 py-1 text-sm font-medium text-white backdrop-blur">{t}</li>
           ))}
         </ul>
-        <p class="mt-5 flex items-center gap-2 text-sm font-semibold text-navy-100">
-          <Icon name="pin" class="h-4 w-4 text-magenta-300" />
-          Base no Paraná e litoral paranaense · Atendimento em todo o Brasil
+        <p class="mt-6 flex max-w-2xl items-start gap-2 text-lg font-semibold leading-relaxed text-white">
+          <Icon name="pin" class="mt-1.5 h-5 w-5 shrink-0 text-magenta-300" />
+          <span>Disponibilizamos tudo o que é necessário para a segurança do seu ambiente,
+          <span class="uppercase text-magenta-300">em todo o Brasil</span>.</span>
         </p>
         <div class="mt-8 flex flex-wrap gap-4">
           <Button href={wa} target="_blank" variant="primary" size="lg">
