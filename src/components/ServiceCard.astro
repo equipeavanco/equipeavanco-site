@@ -11,23 +11,24 @@ const { service, detailed = false } = Astro.props;
 <article
   id={service.slug}
   class:list={[
-    'group relative flex flex-col rounded-2xl p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-magenta-200 hover:shadow-xl hover:shadow-navy-900/5 scroll-mt-24',
+    'group relative flex flex-col overflow-hidden rounded-2xl p-7 pt-8 shadow-md transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl scroll-mt-24',
     service.featured ? 'md:col-span-2 lg:col-span-3 border-2 border-magenta-300 bg-gradient-to-br from-white to-magenta-50/60' : 'border border-navy-100 bg-white',
   ]}
 >
-  <div class="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-navy-50 text-navy-600 transition-colors group-hover:bg-magenta-500 group-hover:text-white">
+  <span class:list={['absolute inset-x-0 top-0 h-1.5', service.featured ? 'bg-magenta-500' : 'bg-navy-600 transition-colors group-hover:bg-magenta-500']} aria-hidden="true"></span>
+  <div class="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-navy-600 text-white transition-colors group-hover:bg-magenta-500">
     <Icon name={service.icon} class="h-7 w-7" />
   </div>
   {service.featured && (
-    <span class="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-magenta-500 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white">
+    <span class="mb-3 inline-flex w-fit items-center gap-1.5 rounded bg-magenta-500 px-3 py-1 font-display text-sm font-bold uppercase tracking-wider text-white">
       Serviço principal
     </span>
   )}
-  <h3 class={service.featured ? 'text-2xl font-extrabold text-navy-800 sm:text-3xl' : 'text-xl font-bold text-navy-800'}>{service.title}</h3>
-  <p class="mt-2 text-sm leading-relaxed text-navy-500">{service.summary}</p>
+  <h3 class={service.featured ? 'text-3xl font-extrabold uppercase text-navy-800 sm:text-4xl' : 'text-2xl font-bold uppercase text-navy-800'}>{service.title}</h3>
+  <p class="mt-2 leading-relaxed text-navy-600">{service.summary}</p>
 
   {(detailed || true) && (
-    <ul class={service.featured ? 'mt-5 grid gap-2.5 text-sm text-navy-700 sm:grid-cols-2 lg:grid-cols-3' : 'mt-5 space-y-2.5 text-sm text-navy-700'}>
+    <ul class={service.featured ? 'mt-5 grid gap-2.5 text-[0.95rem] font-medium text-navy-700 sm:grid-cols-2 lg:grid-cols-3' : 'mt-5 space-y-2.5 text-[0.95rem] font-medium text-navy-700'}>
       {service.items.map((item) => (
         <li class="flex items-start gap-2.5">
           <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-magenta-50 text-magenta-500">
