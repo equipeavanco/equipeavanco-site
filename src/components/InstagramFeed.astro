@@ -8,30 +8,52 @@ import { instagram } from '../data/site';
 
 interface Props {
   title?: string;
+  max?: number;
+  showHeading?: boolean;
 }
-const { title = 'Acompanhe nosso dia a dia' } = Astro.props;
+const { title = 'Acompanhe nosso dia a dia', max = instagram.maxPosts, showHeading = true } = Astro.props;
 ---
 <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-  <div class="flex flex-col items-center gap-6 text-center">
+  {showHeading && <div class="flex flex-col items-center gap-6 text-center">
     <span class="eyebrow">Instagram</span>
     <h2 class="text-4xl font-extrabold text-navy-800 sm:text-5xl lg:text-6xl">{title}</h2>
     <p class="max-w-2xl text-navy-600">
       Eventos, treinamentos e bastidores da equipe em operação, direto do nosso Instagram
       <a href={instagram.url} target="_blank" rel="noopener noreferrer" class="font-semibold text-magenta-600 hover:underline">@{instagram.handle}</a>.
     </p>
-  </div>
+  </div>}
 
   <div
-    id="ig-grid"
-    class="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4"
+    class:list={[showHeading && 'mt-12', 'ig-grid grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4']}
     data-feed={instagram.feedUrl}
-    data-max={instagram.maxPosts}
+    data-max={max}
     data-profile={instagram.url}
   >
-    {instagram.feedUrl && Array.from({ length: instagram.maxPosts }).map(() => (
+    {instagram.feedUrl && Array.from({ length: max }).map(() => (
       <div class="aspect-square animate-pulse rounded-xl bg-navy-100/80"></div>
     ))}
   </div>
+
+  <!-- Visualização da postagem dentro do site -->
+  <dialog class="ig-modal m-auto w-[min(92vw,56rem)] overflow-hidden rounded-2xl bg-white p-0 shadow-2xl backdrop:bg-navy-900/80">
+    <div class="grid md:grid-cols-5">
+      <div class="bg-black md:col-span-3">
+        <img class="ig-modal-img max-h-[80vh] w-full object-contain" alt="" />
+      </div>
+      <div class="flex flex-col p-6 md:col-span-2">
+        <div class="flex items-center justify-between gap-3">
+          <span class="font-display text-lg font-bold uppercase text-navy-800">@{instagram.handle}</span>
+          <button type="button" class="ig-modal-close rounded-lg p-2 text-navy-600 hover:bg-navy-50" aria-label="Fechar">
+            <Icon name="close" class="h-5 w-5" />
+          </button>
+        </div>
+        <p class="ig-modal-caption mt-4 max-h-[50vh] flex-1 overflow-y-auto whitespace-pre-line text-sm leading-relaxed text-navy-700"></p>
+        <a class="ig-modal-link mt-5 inline-flex items-center gap-2 text-sm font-semibold text-magenta-600 hover:underline" target="_blank" rel="noopener noreferrer">
+          <Icon name="instagram" class="h-4 w-4" /> Ver no Instagram
+        </a>
+      </div>
+    </div>
+  </dialog>
 
   <div class="mt-10 flex justify-center">
     <Button href={instagram.url} target="_blank" variant="primary" size="lg">
@@ -52,10 +74,17 @@ const { title = 'Acompanhe nosso dia a dia' } = Astro.props;
     sizes?: Record<string, { mediaUrl?: string }>;
   };
 
-  const grid = document.getElementById('ig-grid');
-  const feed = grid?.dataset.feed;
+  document.querySelectorAll<HTMLElement>('.ig-grid').forEach((grid) => {
+    const feed = grid.dataset.feed;
+    if (!feed) return;
+    const section = grid.closest('section')!;
+    const modal = section.querySelector<HTMLDialogElement>('.ig-modal')!;
+    const mImg = modal.querySelector<HTMLImageElement>('.ig-modal-img')!;
+    const mCap = modal.querySelector<HTMLElement>('.ig-modal-caption')!;
+    const mLink = modal.querySelector<HTMLAnchorElement>('.ig-modal-link')!;
+    modal.querySelector('.ig-modal-close')!.addEventListener('click', () => modal.close());
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.close(); });
 
-  if (grid && feed) {
     const max = Number(grid.dataset.max || 8);
     fetch(feed)
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
@@ -70,13 +99,12 @@ const { title = 'Acompanhe nosso dia a dia' } = Astro.props;
             (p.mediaType === 'VIDEO' ? p.thumbnailUrl : p.mediaUrl) ||
             p.thumbnailUrl;
           if (!img) continue;
-          const a = document.createElement('a');
-          a.href = p.permalink || grid.dataset.profile || '#';
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
+          const big = p.sizes?.large?.mediaUrl || p.sizes?.full?.mediaUrl || img;
+          const caption = (p.caption || p.prunedCaption || '').trim();
+          const a = document.createElement('button');
+          a.type = 'button';
           a.className =
             'group relative block aspect-square overflow-hidden rounded-xl bg-navy-100 shadow-md transition-transform duration-300 hover:-translate-y-1';
-          const caption = (p.prunedCaption || p.caption || '').trim();
           const el = document.createElement('img');
           el.src = img;
           el.alt = caption ? caption.slice(0, 120) : 'Postagem da Equipe Avanço no Instagram';
@@ -85,10 +113,10 @@ const { title = 'Acompanhe nosso dia a dia' } = Astro.props;
           a.appendChild(el);
           const overlay = document.createElement('div');
           overlay.className =
-            'absolute inset-0 flex items-end bg-gradient-to-t from-navy-900/85 via-navy-900/20 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100';
+            'absolute inset-0 flex items-end bg-gradient-to-t from-navy-900/85 via-navy-900/20 to-transparent p-3 text-left opacity-0 transition-opacity duration-300 group-hover:opacity-100';
           const txt = document.createElement('p');
           txt.className = 'line-clamp-3 text-xs font-medium text-white';
-          txt.textContent = caption;
+          txt.textContent = p.prunedCaption || caption;
           overlay.appendChild(txt);
           a.appendChild(overlay);
           if (p.mediaType === 'VIDEO') {
@@ -97,11 +125,18 @@ const { title = 'Acompanhe nosso dia a dia' } = Astro.props;
             badge.textContent = 'Vídeo';
             a.appendChild(badge);
           }
+          a.addEventListener('click', () => {
+            mImg.src = big;
+            mImg.alt = el.alt;
+            mCap.textContent = caption;
+            mLink.href = p.permalink || grid.dataset.profile || '#';
+            modal.showModal();
+          });
           grid.appendChild(a);
         }
       })
       .catch(() => {
         grid.innerHTML = '';
       });
-  }
+  });
 </script>
