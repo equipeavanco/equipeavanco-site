@@ -7,6 +7,10 @@ import { site, href } from '../data/site';
 import { Image } from 'astro:assets';
 import fotoCapa from '../assets/servicos/2f0cc05a-image.png';
 
+// Vídeo de fundo (o mesmo do site antigo). Para trocar, cole outro link .mp4 aqui.
+// Deixe vazio ('') para usar só a foto.
+const videoCapa = 'https://videos.pexels.com/video-files/12730657/12730657-hd_1080_1920_30fps.mp4';
+
 interface Props {
   title?: string;
   description?: string;
@@ -58,7 +62,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
     <!-- Foto de capa fixa: fica parada enquanto o site rola por cima -->
     <div class="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
       <Image src={fotoCapa} alt="" widths={[640, 960, 1280, 1672]} sizes="100vw" loading="eager"
-        class="h-full w-full object-cover" />
+        class="absolute inset-0 h-full w-full object-cover" />
+      {videoCapa && (
+        <video class="video-capa absolute inset-0 h-full w-full object-cover object-[50%_35%]"
+          autoplay muted loop playsinline preload="metadata">
+          <source src={videoCapa} type="video/mp4" />
+        </video>
+      )}
     </div>
     <a
       href="#conteudo"
