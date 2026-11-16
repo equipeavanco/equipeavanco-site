@@ -176,10 +176,11 @@ main > section:not(.bg-brand-gradient)::before {
   position: absolute;
   inset: 0 calc(50% - 50vw);
   z-index: -1;
-  background-color: rgb(255 255 255 / 0.88);
+  background-color: rgb(255 255 255 / 0.62);
+  backdrop-filter: blur(2px);
 }
 main > section[class*='bg-navy-50']::before {
-  background-color: rgb(234 241 249 / 0.9);
+  background-color: rgb(234 241 249 / 0.7);
 }
 
 /* Animação sutil de entrada */
