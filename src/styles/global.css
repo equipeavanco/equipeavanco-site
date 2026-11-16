@@ -92,6 +92,27 @@ h2 {
   );
 }
 
+/* Foto de capa fixa (efeito parallax): a foto fica parada e o conteúdo rola por cima */
+.bg-capa {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+/* iPhone/iPad não suportam fundo fixo: mostra a foto normal */
+@supports (-webkit-touch-callout: none) {
+  .bg-capa {
+    background-attachment: scroll;
+  }
+}
+.capa-overlay {
+  background: linear-gradient(
+    120deg,
+    rgb(0 26 54 / 0.92) 0%,
+    rgb(0 59 115 / 0.82) 55%,
+    rgb(176 0 101 / 0.72) 100%
+  );
+}
+
 /* Rótulo acima dos títulos */
 .eyebrow {
   display: inline-flex;
