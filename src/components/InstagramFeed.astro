@@ -1,0 +1,107 @@
+---
+// Grade de postagens do Instagram. Os posts são buscados no navegador a partir
+// do feed configurado em src/data/site.ts (instagram.feedUrl), então o site
+// acompanha o Instagram sem precisar ser republicado.
+import Icon from './Icon.astro';
+import Button from './Button.astro';
+import { instagram } from '../data/site';
+
+interface Props {
+  title?: string;
+}
+const { title = 'Acompanhe nosso dia a dia' } = Astro.props;
+---
+<section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+  <div class="flex flex-col items-center gap-6 text-center">
+    <span class="eyebrow">Instagram</span>
+    <h2 class="text-4xl font-extrabold text-navy-800 sm:text-5xl lg:text-6xl">{title}</h2>
+    <p class="max-w-2xl text-navy-600">
+      Eventos, treinamentos e bastidores da equipe em operação, direto do nosso Instagram
+      <a href={instagram.url} target="_blank" rel="noopener noreferrer" class="font-semibold text-magenta-600 hover:underline">@{instagram.handle}</a>.
+    </p>
+  </div>
+
+  <div
+    id="ig-grid"
+    class="mt-12 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4"
+    data-feed={instagram.feedUrl}
+    data-max={instagram.maxPosts}
+    data-profile={instagram.url}
+  >
+    {instagram.feedUrl && Array.from({ length: instagram.maxPosts }).map(() => (
+      <div class="aspect-square animate-pulse rounded-xl bg-navy-100/80"></div>
+    ))}
+  </div>
+
+  <div class="mt-10 flex justify-center">
+    <Button href={instagram.url} target="_blank" variant="primary" size="lg">
+      <Icon name="instagram" class="h-5 w-5" />
+      Seguir @{instagram.handle}
+    </Button>
+  </div>
+</section>
+
+<script>
+  type Post = {
+    permalink?: string;
+    mediaType?: string;
+    mediaUrl?: string;
+    thumbnailUrl?: string;
+    caption?: string;
+    prunedCaption?: string;
+    sizes?: Record<string, { mediaUrl?: string }>;
+  };
+
+  const grid = document.getElementById('ig-grid');
+  const feed = grid?.dataset.feed;
+
+  if (grid && feed) {
+    const max = Number(grid.dataset.max || 8);
+    fetch(feed)
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((data) => {
+        const posts: Post[] = (Array.isArray(data) ? data : data.posts || []).slice(0, max);
+        if (!posts.length) throw new Error('sem posts');
+        grid.innerHTML = '';
+        for (const p of posts) {
+          const img =
+            p.sizes?.medium?.mediaUrl ||
+            p.sizes?.small?.mediaUrl ||
+            (p.mediaType === 'VIDEO' ? p.thumbnailUrl : p.mediaUrl) ||
+            p.thumbnailUrl;
+          if (!img) continue;
+          const a = document.createElement('a');
+          a.href = p.permalink || grid.dataset.profile || '#';
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.className =
+            'group relative block aspect-square overflow-hidden rounded-xl bg-navy-100 shadow-md transition-transform duration-300 hover:-translate-y-1';
+          const caption = (p.prunedCaption || p.caption || '').trim();
+          const el = document.createElement('img');
+          el.src = img;
+          el.alt = caption ? caption.slice(0, 120) : 'Postagem da Equipe Avanço no Instagram';
+          el.loading = 'lazy';
+          el.className = 'h-full w-full object-cover transition-transform duration-500 group-hover:scale-105';
+          a.appendChild(el);
+          const overlay = document.createElement('div');
+          overlay.className =
+            'absolute inset-0 flex items-end bg-gradient-to-t from-navy-900/85 via-navy-900/20 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100';
+          const txt = document.createElement('p');
+          txt.className = 'line-clamp-3 text-xs font-medium text-white';
+          txt.textContent = caption;
+          overlay.appendChild(txt);
+          a.appendChild(overlay);
+          if (p.mediaType === 'VIDEO') {
+            const badge = document.createElement('span');
+            badge.className = 'absolute right-2 top-2 rounded bg-black/60 px-1.5 py-0.5 text-[10px] font-bold uppercase text-white';
+            badge.textContent = 'Vídeo';
+            a.appendChild(badge);
+          }
+          grid.appendChild(a);
+        }
+      })
+      .catch(() => {
+        grid.innerHTML = '';
+      });
+  }
+</script>
