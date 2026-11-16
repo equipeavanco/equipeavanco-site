@@ -48,6 +48,19 @@ export const contact = {
 };
 
 // ───────────────────────────────────────────────────────────────────────────
+// INSTAGRAM (postagens no site, atualizam sozinhas)
+// 1. Crie uma conta grátis em https://behold.so e conecte o Instagram da empresa.
+// 2. Crie um feed e copie o "JSON Feed URL" (ex.: https://feeds.behold.so/abc123).
+// 3. Cole em feedUrl abaixo. Enquanto estiver vazio, aparece só o botão do perfil.
+// ───────────────────────────────────────────────────────────────────────────
+export const instagram = {
+  handle: 'equipeavanco',
+  url: 'https://instagram.com/equipeavanco',
+  feedUrl: '',
+  maxPosts: 8,
+};
+
+// ───────────────────────────────────────────────────────────────────────────
 // POWER BI (painel público)
 // Para exibir um painel: no Power BI, use "Publicar na Web (público)",
 // copie o link do iframe e cole a URL em embedUrl abaixo.
