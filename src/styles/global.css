@@ -147,9 +147,39 @@ h2 {
   color: #fff;
 }
 
-/* Utilitário: fundo com gradiente da marca */
+/* Utilitário: fundo com gradiente da marca (translúcido, deixa a foto de capa aparecer) */
 .bg-brand-gradient {
-  background-image: linear-gradient(135deg, var(--color-navy-700) 0%, var(--color-navy-600) 55%, var(--color-magenta-600) 140%);
+  background-image: linear-gradient(
+    120deg,
+    rgb(0 26 54 / 0.9) 0%,
+    rgb(0 59 115 / 0.8) 55%,
+    rgb(176 0 101 / 0.72) 100%
+  );
+}
+
+/* ───────────────────────────────────────────────────────────────
+   FOTO DE CAPA FIXA EM TODO O SITE
+   A foto fica parada no fundo (Layout.astro) e as seções rolam por cima.
+   Seções claras ganham um véu branco translúcido de ponta a ponta.
+   ─────────────────────────────────────────────────────────────── */
+html,
+body {
+  overflow-x: clip;
+}
+main > section:not(.bg-brand-gradient) {
+  position: relative;
+  isolation: isolate;
+  background-color: transparent !important;
+}
+main > section:not(.bg-brand-gradient)::before {
+  content: '';
+  position: absolute;
+  inset: 0 calc(50% - 50vw);
+  z-index: -1;
+  background-color: rgb(255 255 255 / 0.88);
+}
+main > section[class*='bg-navy-50']::before {
+  background-color: rgb(234 241 249 / 0.9);
 }
 
 /* Animação sutil de entrada */
