@@ -166,12 +166,6 @@ html,
 body {
   overflow-x: clip;
 }
-/* Quem prefere menos movimento vê só a foto */
-@media (prefers-reduced-motion: reduce) {
-  .video-capa {
-    display: none;
-  }
-}
 main > section:not(.bg-brand-gradient) {
   position: relative;
   isolation: isolate;
