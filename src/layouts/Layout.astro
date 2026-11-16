@@ -4,6 +4,8 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import { site, href } from '../data/site';
+import { Image } from 'astro:assets';
+import fotoCapa from '../assets/servicos/2f0cc05a-image.png';
 
 interface Props {
   title?: string;
@@ -52,7 +54,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
     />
     <meta name="theme-color" content="#003b73" />
   </head>
-  <body class="bg-white text-navy-900 antialiased">
+  <body class="bg-navy-900 text-navy-900 antialiased">
+    <!-- Foto de capa fixa: fica parada enquanto o site rola por cima -->
+    <div class="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
+      <Image src={fotoCapa} alt="" widths={[640, 960, 1280, 1672]} sizes="100vw" loading="eager"
+        class="h-full w-full object-cover" />
+    </div>
     <a
       href="#conteudo"
       class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-navy-700 focus:px-4 focus:py-2 focus:text-white"
