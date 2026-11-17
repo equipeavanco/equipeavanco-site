@@ -1,0 +1,44 @@
+name: Importar blog do site antigo
+
+# Copia os artigos de equipeavanco.com.br/bombeiros-civil-blog para o site novo.
+# Roda sozinho quando o script muda, ou manualmente pela aba "Actions".
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/import-blog.mjs
+      - .github/workflows/import-blog.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: import-blog
+  cancel-in-progress: false
+
+jobs:
+  importar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Instalar leitor de HTML
+        run: npm install --no-save --no-package-lock node-html-parser@6
+      - name: Importar artigos
+        run: node scripts/import-blog.mjs
+      - name: Salvar no repositório
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/blog public/blog
+          if git diff --cached --quiet; then echo "Nada novo"; exit 0; fi
+          git commit -m "Importa artigos do blog do site antigo"
+          git push
+      - name: Publicar o site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main
