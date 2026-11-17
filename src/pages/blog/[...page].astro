@@ -1,0 +1,62 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import InstagramFeed from '../../components/InstagramFeed.astro';
+import Icon from '../../components/Icon.astro';
+import { href } from '../../data/site';
+import { posts } from '../../data/blog';
+
+export const getStaticPaths = (({ paginate }) => paginate(posts, { pageSize: 12 })) satisfies GetStaticPaths;
+const { page } = Astro.props;
+const n = page.currentPage;
+const ult = page.lastPage;
+const numeros = [...new Set([1, n - 2, n - 1, n, n + 1, n + 2, ult])].filter((x) => x >= 1 && x <= ult).sort((a, b) => a - b);
+const link = (x: number) => href(x === 1 ? '/blog' : `/blog/${x}`);
+---
+<Layout
+  title={n > 1 ? `Blog - página ${n}` : 'Blog'}
+  description="Artigos da Equipe Avanço sobre bombeiro civil, prevenção, primeiros socorros, NRs e segurança em eventos e empresas."
+>
+  <PageHeader
+    eyebrow="Blog"
+    title="Conteúdo sobre prevenção e segurança"
+    subtitle="Artigos sobre bombeiro civil, primeiros socorros, normas regulamentadoras e segurança em eventos e empresas."
+  />
+
+  <section class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 sm:py-20">
+    {page.data.length === 0 ? (
+      <p class="text-center text-navy-600">Os artigos estão sendo carregados. Volte em instantes.</p>
+    ) : (
+      <div class="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        {page.data.map((post) => <BlogCard post={post} />)}
+      </div>
+    )}
+
+    {ult > 1 && (
+      <nav class="mt-14 flex flex-wrap items-center justify-center gap-2" aria-label="Páginas do blog">
+        {page.url.prev && (
+          <a href={link(n - 1)} class="rounded-lg bg-white p-2.5 text-navy-700 shadow-md hover:text-magenta-600" aria-label="Página anterior">
+            <Icon name="arrow" class="h-5 w-5 rotate-180" />
+          </a>
+        )}
+        {numeros.map((x, i) => (
+          <>
+            {i > 0 && x - numeros[i - 1] > 1 && <span class="px-1 text-navy-500">…</span>}
+            <a href={link(x)}
+              class:list={['min-w-11 rounded-lg px-3 py-2 text-center font-display text-lg font-bold shadow-md', x === n ? 'bg-magenta-500 text-white' : 'bg-white text-navy-700 hover:text-magenta-600']}
+              aria-current={x === n ? 'page' : undefined}>{x}</a>
+          </>
+        ))}
+        {page.url.next && (
+          <a href={link(n + 1)} class="rounded-lg bg-white p-2.5 text-navy-700 shadow-md hover:text-magenta-600" aria-label="Próxima página">
+            <Icon name="arrow" class="h-5 w-5" />
+          </a>
+        )}
+      </nav>
+    )}
+  </section>
+
+  {n === 1 && <InstagramFeed title="Acesse nosso Instagram" max={12} />}
+</Layout>

@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { contact, href } from '../../data/site';
+import { posts, local, corrigirHtml, dataBR, type Post } from '../../data/blog';
+
+export function getStaticPaths() {
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+const { post } = Astro.props as { post: Post };
+const outros = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+const wa = `https://wa.me/${contact.primaryWhatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
+---
+<Layout title={post.title} description={post.description || post.subtitle || post.title}>
+  <section class="bg-brand-gradient relative overflow-hidden text-white">
+    <div class="relative mx-auto max-w-4xl px-4 pb-16 pt-14 sm:px-6 lg:px-8">
+      <a href={href('/blog')} class="eyebrow eyebrow-light hover:underline">Blog</a>
+      <h1 class="mt-4 text-4xl font-extrabold sm:text-5xl">{post.title}</h1>
+      {post.subtitle && <p class="mt-4 text-lg text-navy-100">{post.subtitle}</p>}
+      <p class="mt-5 font-display text-base font-bold uppercase tracking-wider text-magenta-300">
+        {post.author && <>{post.author} · </>}{dataBR(post.date)}{post.minutes ? ` · ${post.minutes} min de leitura` : ''}
+      </p>
+    </div>
+    <div class="band-refletiva absolute inset-x-0 bottom-0" aria-hidden="true"></div>
+  </section>
+
+  <section class="px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <article class="mx-auto max-w-3xl overflow-hidden rounded-2xl bg-white shadow-md">
+      {post.cover && <img src={local(post.cover)} alt={post.coverAlt || post.title} class="aspect-[16/8] w-full object-cover" />}
+      <div class="prose-blog p-6 sm:p-10" set:html={corrigirHtml(post.html)} />
+      <div class="border-t border-navy-100 bg-navy-50 p-6 text-center sm:p-8">
+        <p class="font-display text-2xl font-bold uppercase text-navy-800">Precisa de bombeiros civis ou socorristas?</p>
+        <div class="mt-4 flex flex-wrap justify-center gap-3">
+          <Button href={wa} target="_blank" variant="primary"><Icon name="whatsapp" class="h-4 w-4" /> Solicitar orçamento</Button>
+          <Button href={href('/blog')} variant="outline">Mais artigos</Button>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  {outros.length > 0 && (
+    <section class="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
+      <h2 class="text-center text-4xl font-extrabold text-navy-800">Leia também</h2>
+      <div class="mt-10 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        {outros.map((p) => <BlogCard post={p} />)}
+      </div>
+    </section>
+  )}
+</Layout>
