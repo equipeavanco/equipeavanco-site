@@ -1,17 +1,14 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PageHeader from '../components/PageHeader.astro';
-import InstagramFeed from '../components/InstagramFeed.astro';
-import { instagram } from '../data/site';
+import { href } from '../data/site';
+const destino = href('/blog');
 ---
-<Layout
-  title="Instagram"
-  description="Acompanhe as postagens da Equipe Avanço: eventos, treinamentos e bastidores da equipe em operação."
->
-  <PageHeader
-    eyebrow="Instagram"
-    title={`@${instagram.handle}`}
-    subtitle="Eventos, treinamentos e bastidores da equipe em operação. As postagens do nosso Instagram aparecem aqui automaticamente."
-  />
-  <InstagramFeed max={24} showHeading={false} />
-</Layout>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${destino}`} />
+    <link rel="canonical" href={destino} />
+    <title>Blog | Equipe Avanço</title>
+  </head>
+  <body><a href={destino}>Ir para o blog</a></body>
+</html>
