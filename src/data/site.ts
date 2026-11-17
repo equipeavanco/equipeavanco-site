@@ -51,13 +51,30 @@ export const contact = {
 // INSTAGRAM (postagens no site, atualizam sozinhas)
 // 1. Crie uma conta grátis em https://behold.so e conecte o Instagram da empresa.
 // 2. Crie um feed e copie o "JSON Feed URL" (ex.: https://feeds.behold.so/abc123).
-// 3. Cole em feedUrl abaixo. Enquanto estiver vazio, aparece só o botão do perfil.
+// 3. Cole em feedUrl abaixo. Enquanto estiver vazio, valem os links da lista `posts`.
 // ───────────────────────────────────────────────────────────────────────────
 export const instagram = {
   handle: 'equipeavanco',
   url: 'https://instagram.com/equipeavanco',
   feedUrl: '',
   maxPosts: 8,
+  // SEM CONEXÃO: enquanto feedUrl estiver vazio, o site mostra as postagens desta
+  // lista (do Instagram oficial). Para adicionar um post novo: no Instagram, abra o
+  // post, copie o link e cole no TOPO desta lista.
+  posts: [
+    'https://www.instagram.com/p/DXC8stfFiM7/',
+    'https://www.instagram.com/p/DWXKjg6xY-2/',
+    'https://www.instagram.com/p/DXC-bMdluws/',
+    'https://www.instagram.com/p/Df0Tqnah-db/',
+    'https://www.instagram.com/p/DfvFIl6Fu8I/',
+    'https://www.instagram.com/p/DfqFFdlFlHI/',
+    'https://www.instagram.com/p/DfmwTFllgRx/',
+    'https://www.instagram.com/p/Dfk2wHEvXU3/',
+    'https://www.instagram.com/p/DfepLrFRvt5/',
+    'https://www.instagram.com/p/DfaoWP7D2pg/',
+    'https://www.instagram.com/p/DfNU37mhAZz/',
+    'https://www.instagram.com/p/DfMuv3WRzEQ/',
+  ],
 };
 
 // ───────────────────────────────────────────────────────────────────────────
