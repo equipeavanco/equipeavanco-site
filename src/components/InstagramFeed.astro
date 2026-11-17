@@ -11,7 +11,11 @@ interface Props {
   max?: number;
   showHeading?: boolean;
 }
-const { title = 'Acompanhe nosso dia a dia', max = instagram.maxPosts, showHeading = true } = Astro.props;
+const { title = 'Acompanhe nosso dia a dia', max, showHeading = true } = Astro.props;
+// Com feed conectado: grade automática. Sem feed: postagens oficiais incorporadas da lista.
+const modoFeed = Boolean(instagram.feedUrl);
+const total = max ?? (modoFeed ? instagram.maxPosts : 3);
+const embeds = modoFeed ? [] : instagram.posts.slice(0, total);
 ---
 <section class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
   {showHeading && <div class="flex flex-col items-center gap-6 text-center">
@@ -23,16 +27,34 @@ const { title = 'Acompanhe nosso dia a dia', max = instagram.maxPosts, showHeadi
     </p>
   </div>}
 
-  <div
+  {embeds.length > 0 && (
+    <div class:list={[showHeading && 'mt-12', 'grid items-start gap-6 [grid-template-columns:repeat(auto-fill,minmax(min(100%,326px),1fr))]']}>
+      {embeds.map((url) => (
+        <blockquote
+          class="instagram-media"
+          data-instgrm-permalink={`${url}?utm_source=ig_embed`}
+          data-instgrm-version="14"
+          style="background:#fff; border:0; border-radius:12px; box-shadow:0 12px 28px -12px rgb(0 37 74 / .32); margin:0; max-width:540px; min-width:0; padding:0; width:100%;"
+        >
+          <a href={url} target="_blank" rel="noopener noreferrer" class="block p-6 text-center text-sm font-semibold text-magenta-600">
+            Ver esta postagem no Instagram
+          </a>
+        </blockquote>
+      ))}
+    </div>
+  )}
+  {embeds.length > 0 && <script is:inline async src="https://www.instagram.com/embed.js"></script>}
+
+  {modoFeed && <div
     class:list={[showHeading && 'mt-12', 'ig-grid grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4']}
     data-feed={instagram.feedUrl}
-    data-max={max}
+    data-max={total}
     data-profile={instagram.url}
   >
-    {instagram.feedUrl && Array.from({ length: max }).map(() => (
+    {Array.from({ length: total }).map(() => (
       <div class="aspect-square animate-pulse rounded-xl bg-navy-100/80"></div>
     ))}
-  </div>
+  </div>}
 
   <!-- Visualização da postagem dentro do site -->
   <dialog class="ig-modal m-auto w-[min(92vw,56rem)] overflow-hidden rounded-2xl bg-white p-0 shadow-2xl backdrop:bg-navy-900/80">
