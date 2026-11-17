@@ -96,6 +96,8 @@ export function limparHtml(node, ctx) {
 function urlCapa(p) {
   if (!p.coverPath) return '';
   if (/^https?:/.test(p.coverPath)) return p.coverPath;
+  if (p.coverOrigin === 'unsplash' || /^photo-/.test(p.coverPath))
+    return `https://images.unsplash.com/${p.coverPath}?auto=format&fit=crop&w=1200&q=75`;
   return `https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1200,fit=crop/${SITE_ID}/${p.coverPath}`;
 }
 function normalizarImg(src) {
@@ -136,7 +138,8 @@ async function importar(p, slugs) {
   const hdr = doc.querySelector('.block-blog-header');
   const ps = hdr ? hdr.querySelectorAll('p') : [];
   const subtitle = ps[0] ? ps[0].text.trim() : '';
-  const author = ps[1] ? ps[1].text.trim() : '';
+  const autorBruto = ps.length >= 3 ? ps[1].text.trim() : '';
+  const author = /\d+\/\d+\/\d{4}|min read/.test(autorBruto) ? '' : autorBruto;
   const secoes = doc.querySelectorAll('main.page .page__blocks > section');
   const corpoSecao = secoes[1] || doc;
   const caixas = corpoSecao.querySelectorAll('.layout-element__component--GridTextBox');
@@ -164,7 +167,8 @@ async function importar(p, slugs) {
   for (const im of ctx.imgs) html = html.replace(`{{${im.id}}}`, await baixarImg(im.src));
 
   let cover = '';
-  const capa = urlCapa(p);
+  const og = doc.querySelector('meta[property="og:image"]')?.getAttribute('content') || '';
+  const capa = og || urlCapa(p);
   if (capa) cover = await baixarImg(capa);
   if (!cover) {
     const img = corpoSecao.querySelector('.layout-element__component--GridImage img');
