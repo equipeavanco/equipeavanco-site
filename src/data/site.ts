@@ -93,7 +93,7 @@ export const nav = [
   { label: 'Início', href: '/' },
   { label: 'Serviços', href: '/servicos' },
   { label: 'Portfólio', href: '/portfolio' },
-  { label: 'Instagram', href: '/instagram' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Sobre', href: '/sobre' },
   { label: 'Cliente', href: '/cliente' },
   { label: 'Equipe', href: '/equipe' },
